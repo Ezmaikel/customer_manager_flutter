@@ -11,13 +11,14 @@ class DeleteClienteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<ClienteViewmodel>();
     return AlertDialog(
       title: Text(
         "¿Eliminar Cliente?",
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       ),
       content: SizedBox(
-        height: 87,
+        height: 95,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,6 +54,9 @@ class DeleteClienteWidget extends StatelessWidget {
 
   void _onDelete(BuildContext context) {
     context.read<ClienteViewmodel>().deleteCliente(cliente.id!);
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Cliente eliminado correctamente')));
     Navigator.pop(context);
   }
 }
